@@ -26,7 +26,7 @@ Route::get('/my-event',[HomeController::class,'myEvent'])->name('my-event')->mid
 Route::get('/detail/{slug}', [DetailController::class, 'index'])->name('detail');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout');
 Route::get('/profile',[HomeController::class,'profile'])->name('profile')->middleware('auth');
-Route::get('/ticket', [CheckoutController::class, 'ticket'])->name('ticket')->middleware('auth');
+Route::get('/ticket', [CheckoutController::class, 'ticket'])->name('ticket');
 
 Route::prefix('admin')
     // ->namespace('App\Http\Controllers\Admin')

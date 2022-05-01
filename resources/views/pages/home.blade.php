@@ -72,7 +72,7 @@ Gereja
                     $i++;
                     if(count($item->capacities) > 1){
                       if ($i === 1) {
-                        echo "dan";
+                        echo " dan ";
                       }
                     }
                   }
@@ -95,13 +95,14 @@ Gereja
                 <i class="bi bi-people"></i>&nbsp; Kouta
                 <?php
                 $totalKouta = 0;
+
                 foreach ($item->capacities as $data) {
                   $totalKouta += $data->kouta;
                 }
 
                 echo $totalKouta;
                 ?>
-                (Sisa 40 Jemaat)
+                (Sisa Kouta <b>{{ $totalKouta - getCountRegisterByEvent($item->id) }}</b> Jemaat)
               </p>
             </div>
             <hr>

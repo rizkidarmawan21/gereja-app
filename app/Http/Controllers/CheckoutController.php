@@ -50,6 +50,7 @@ class CheckoutController extends Controller
             'name' => 'required',
             'gender' => 'required',
             'age' => 'required',
+            'phoneNumber' => 'required',
             'capacity_id'=> 'required',
             'transportasi' =>'required',
             'status_anggota' => 'required'
@@ -61,8 +62,15 @@ class CheckoutController extends Controller
 
         RegIbadah::create($validation);
         
-        // return redirect()->back()->with('success', 'Registrasi ibadah berhasil');
-        echo "success daftar";
+        $dataRegIbadah = [
+            'name' =>$request->name,
+            'event' => Event::findOrFail($request->event_id)->get(),
+            'seat_number' => 1,
+            'status_kehadiran' => 'belum hadir',
+        ];
+
+        return view('pages.ticket');
+        // echo "success daftar";
     }
 
     /**

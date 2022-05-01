@@ -55,6 +55,16 @@
                 <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Masukan nama anda">
                 @error('name')
                 <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+              </div>
+              <div class="form-group">
+                <label for="phoneNumber">Telepon / Whatsapp</label>
+                <input type="number" class="form-control @error('phoneNumber') is-invalid @enderror" id="phoneNumber" name="phoneNumber" placeholder="Masukan nomor telepon / whatsapp">
+                 
+                @error('phoneNumber')
+                <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
                 @enderror
@@ -197,7 +207,7 @@
               <tr>
                 <th width="40%">{{ $capacity->region }}</th>
                 <td width="30%">{{ $capacity->kouta }} Jemaat</td>
-                <td width="30%" class="text-right">100 Jemaat</td>
+                <td width="30%" class="text-right">{{ ($capacity->kouta - getCountRegisterByCapacities($capacity->id)) }} Jemaat</td>
               </tr>
               @endforeach
             </table>

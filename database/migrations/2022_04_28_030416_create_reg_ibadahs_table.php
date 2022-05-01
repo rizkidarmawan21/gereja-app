@@ -25,6 +25,7 @@ class CreateRegIbadahsTable extends Migration
             $table->string('name');
             $table->string('gender');
             $table->string('age');
+            $table->string('phoneNumber');
 
             $table->unsignedBigInteger('capacity_id');
             $table->foreign('capacity_id')
