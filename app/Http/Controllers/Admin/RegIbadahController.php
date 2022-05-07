@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Event;
 use App\Models\RegIbadah;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,22 @@ class RegIbadahController extends Controller
      */
     public function index()
     {
-        //
+        $event = Event::all();
+        return view('pages.admin.regIbadah.index',[
+            'event' => $event,
+            'regIbadah' => RegIbadah::all(),
+            'titlePage' => 'Semua Data Pendaftar'
+        ]);
+    }
+    public function byEvent($event_id)
+    {
+        $event = Event::all();
+        $data = Event::findOrFail($event_id);
+        return view('pages.admin.regIbadah.index',[
+            'event' => $event,
+            'regIbadah' => RegIbadah::with(['event','capacities'])->where('event_id',$event_id)->get(),
+            'titlePage' => 'Data Pendaftar '.$data->title
+        ]);
     }
 
     /**

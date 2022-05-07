@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CapacityController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\JemaatController;
+use App\Http\Controllers\Admin\RegIbadahController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\HomeController;
@@ -37,6 +38,8 @@ Route::prefix('admin')
         Route::resource('jemaat', JemaatController::class);
         Route::post('capacity/store/{eventID}', [CapacityController::class, 'store'])->name('capacity.store');
         Route::resource('capacity', CapacityController::class)->except('store');
+        Route::get('/reg_ibadah/byEvent/{eventID}', [RegIbadahController::class,'byEvent'])->name('byEvent');
+        Route::resource('reg_ibadah', RegIbadahController::class);
         // Route::resource('transaction', 'TransactionController');
     });
 

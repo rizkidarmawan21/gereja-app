@@ -13,6 +13,7 @@
     <title>Halaman Admin</title>
 
     @include('includes.admin.style')
+    @stack('addon-style')
 
 </head>
 

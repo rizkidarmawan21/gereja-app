@@ -27,10 +27,10 @@
                     <i class="fas fa-fw fa-calendar"></i>
                     <span>Event/Ibadah</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="}">
+            <li class="nav-item {{ set_active(['reg_ibadah.index','reg_ibadah.create','reg_ibadah.edit']) }}">
+                <a class="nav-link" href="{{ route('reg_ibadah.index') }}">
                     <i class="fas fa-fw fa-church"></i>
-                    <span>Pendaftaran Ibadah</span></a>
+                    <span>Pendaftar Ibadah</span></a>
             </li>
 
             <!-- Sidebar Toggler (Sidebar) -->

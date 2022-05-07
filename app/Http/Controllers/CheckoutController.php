@@ -66,7 +66,7 @@ class CheckoutController extends Controller
             'name' =>$request->name,
             'event' => Event::findOrFail($request->event_id)->get(),
             'seat_number' => 1,
-            'status_kehadiran' => 'belum hadir',
+            'status_kehadiran' => '0',  // 0 = belum hadir,1 = sudah hadir
         ];
 
         return view('pages.ticket');
