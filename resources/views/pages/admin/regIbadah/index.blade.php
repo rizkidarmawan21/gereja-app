@@ -31,7 +31,7 @@
                 <table class="table table-bordered" id="example" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            {{-- <th>No</th> --}}
                             <th>Nomor Kursi</th>
                             <th>Nama Jemaat</th>
                             <th>Status Anggota</th>
@@ -47,7 +47,7 @@
                     <tbody>
                         @foreach($regIbadah as $item)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            {{-- <td>{{ $loop->iteration }}</td> --}}
                             <td>{{ $item->seat_number }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->status_anggota }}</td>

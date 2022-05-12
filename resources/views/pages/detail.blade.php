@@ -23,15 +23,14 @@
         </div>
       </div>
       <div class="row">
-        {{-- @if ($errors->any())
-        <div class="alert alert-danger">
-          <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-          </ul>
+        @if (session()->has('error'))     
+        <div class="alert alert-danger alert-dismissible fade show col-lg-7" role="alert">
+          {{ session('error') }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        @endif --}}
+        @endif
         <div class="col-lg-7 pl-lg-0 ">
           <div class="card card-details">
             <h1>{{ $event->title }}</h1>
@@ -116,7 +115,15 @@
                 <select class="form-control @error('capacity_id') is-invalid @enderror" id="region" name="capacity_id">
                   <option value="">[ Pilih Wilayah ]</option>
                   @foreach($event->capacities as $capacity)
-                  <option value="{{ $capacity->id }}">{{ $capacity->region }}</option>
+                  <option value="{{ $capacity->id }}"
+                  @if($capacity->kouta - getCountRegisterByCapacities($capacity->id) <= 0) 
+                  disabled
+                  @endif
+                  >
+                  <?php $koutaSisa = $capacity->kouta - getCountRegisterByCapacities($capacity->id) ?>
+                  {{ $capacity->region }} / ( {{ $koutaSisa <= 0 ? "Kouta habis" : "Sisa kouta {$koutaSisa} "  }}) 
+                  {{-- {{ $capacity->region }} / ( {{ $capacity->kouta - getCountRegisterByCapacities($capacity->id) <=}} ) --}}
+                </option>
                   @endforeach
                 </select>
                 @error('region')

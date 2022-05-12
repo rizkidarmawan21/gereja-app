@@ -16,7 +16,7 @@ class CreateCapacitiesTable extends Migration
         Schema::create('capacities', function (Blueprint $table) {
             $table->id();
             $table->string('region');
-            $table->string('kouta');
+            $table->integer('kouta');
             $table->unsignedBigInteger('event_id');
             $table->foreign('event_id')
                 ->references('id')

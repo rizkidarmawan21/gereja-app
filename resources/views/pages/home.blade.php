@@ -107,7 +107,7 @@ Gereja
             </div>
             <hr>
             <div class="btn-detail text-center">
-              <a href="{{ route('detail', $item->slug) }}" class="btn btn-detail-event btn-block">Lihat detail</a>
+              <a href="{{ route('detail', $item->slug) }}" class="btn btn-detail-event btn-block @if(($totalKouta - getCountRegisterByEvent($item->id)) == 0) disabled @endif" >@if(($totalKouta - getCountRegisterByEvent($item->id)) == 0) Kouta Habis @else Lihat Detail @endif</a>
             </div>
           </div>
         </div>

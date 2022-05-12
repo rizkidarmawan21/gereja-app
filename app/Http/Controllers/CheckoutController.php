@@ -58,18 +58,51 @@ class CheckoutController extends Controller
 
 
         $validation['status_kehadiran'] = 'belum hadir';
-        $validation['seat_number'] = 1;
+
+        $totalKouta = 0;
+        //get data kouta
+        $dataEvent = Event::with(['capacities'])->findOrFail($request->event_id);
+
+        foreach($dataEvent->capacities as $item){
+            $totalKouta += $item->kouta;
+        }
+
+
+        
+        $dataRegIbadah = RegIbadah::where('event_id', $request->event_id)->get(); 
+        if($totalKouta == count($dataRegIbadah)){
+            return redirect()->back()->with('error', 'Maaf kouta sudah penuh');
+        }
+
+        if(count($dataRegIbadah) > 0){
+            // echo 'data event ada';
+            $seat_number = count($dataRegIbadah) + 1;
+            // foreach($dataRegIbadah as $item){
+            //     $seat_number += 1;
+            // }
+            
+        }else {
+            // echo 'data pendaftar kosong pada event tsb';
+            $seat_number = 1;
+
+        }
+
+        // die();
+
+
+        $validation['seat_number'] = $seat_number;
 
         RegIbadah::create($validation);
         
         $dataRegIbadah = [
             'name' =>$request->name,
-            'event' => Event::findOrFail($request->event_id)->get(),
-            'seat_number' => 1,
+            'event' => Event::findOrFail($request->event_id),
+            'seat_number' => $seat_number,
             'status_kehadiran' => '0',  // 0 = belum hadir,1 = sudah hadir
         ];
 
-        return view('pages.ticket');
+        // return view('pages.ticket');
+        return redirect()->route('ticket')->with('data_reg' ,$dataRegIbadah);
         // echo "success daftar";
     }
 
