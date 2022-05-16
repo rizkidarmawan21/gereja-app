@@ -86,7 +86,7 @@ class RegIbadahController extends Controller
      */
     public function update(Request $request, RegIbadah $regIbadah)
     {
-        //
+        echo "update cok";
     }
 
     /**
@@ -97,6 +97,7 @@ class RegIbadahController extends Controller
      */
     public function destroy(RegIbadah $regIbadah)
     {
-        //
+        $regIbadah->delete();
+        return redirect()->route('reg_ibadah.index');
     }
 }

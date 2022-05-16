@@ -36,7 +36,7 @@ class CreateRegIbadahsTable extends Migration
             $table->string('transportasi');
             $table->string('status_anggota');
             $table->string('status_kehadiran'); //hadir, izin, sakit, alfa  
-            $table->softDeletes();
+            // $table->softDeletes();
             $table->timestamps();
         });
     }
