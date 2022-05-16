@@ -148,6 +148,6 @@ class CheckoutController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        
     }
 }

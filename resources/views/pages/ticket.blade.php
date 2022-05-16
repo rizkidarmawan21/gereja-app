@@ -9,7 +9,7 @@
 {{-- {{ dd(session('data_reg')['event']->title) }} --}}
 <main>
   <div class="section-success d-flex align-items-center">
-    
+
     <div class="col-12 col-lg-6 col-md-8 mx-auto">
       <div class="back my-4">
         <a href="{{ url('') }}" class="text-secondary">
@@ -17,7 +17,7 @@
           <span class="text-secondary">Back to Home</span>
         </a>
       </div>
-      <div class="card card-ticket text-center">
+      <div class="card card-ticket text-center" id="download-page">
         <div class="circle-ticket-left"></div>
         <div class="circle-ticket-right"></div>
         <div class="card-header ">
@@ -31,39 +31,55 @@
             </h6>
           </div>
           {{-- <p class=" mt-3">
-          Tiket Digital anda telah terkirim melalui email yang terdaftar.
+            Tiket Digital anda telah terkirim melalui email yang terdaftar.
           </p> --}}
           <hr>
           <div class=" mt-4">
             <h4>{{ session('data_reg')['event']->title }}</h4>
           </div>
           <div class="detail-ticket  mt-3">
-           <p>
-            <i class="bi bi-calendar-event"></i> Minggu, 10 April 2022
-            <span class="ml-4"></span>
-            <i class="bi bi-clock"></i> 10.00 - 12.00
-           </p>
-           <h3>{{ session('data_reg')['name'] }}</h3>
-           <h5>Nomor Kursi <b>98121</b></h5>
+            <p>
+              <i class="bi bi-calendar-event"></i> {{
+              \Carbon\Carbon::create(session('data_reg')['event']->start_date)->format('l, n F Y') }}
+              <span class="ml-4"></span>
+              <i class="bi bi-clock"></i> {{
+              \Carbon\Carbon::createFromFormat('H:i:s',session('data_reg')['event']->start_time)->format('g.i
+              A') }} - {{ \Carbon\Carbon::createFromFormat('H:i:s',session('data_reg')['event']->end_time)->format('g.i
+              A') }}
+            </p>
+            <h3>{{ session('data_reg')['name'] }}</h3>
+            <h5>Nomor Kursi <b>{{ session('data_reg')['seat_number'] }}</b></h5>
           </div>
           <p class="mt-5 ">
             Silakan tunjukan tiket ini saat anda melakukan check in di tempat acara
           </p>
           <hr>
           <p>
-            <b>Tiket Belum Digunakan</b>
+            <b>
+              @if(session('data_reg')['status_kehadiran'] == 0)
+
+              Tiket Belum Digunakan
+              @else
+              Tiket telah digunakan
+              @endif
+            </b>
             <br>
             <small>
-              Berlaku hingga  10 April 2022 / 12.00
+              Berlaku hingga {{ \Carbon\Carbon::create(session('data_reg')['event']->start_date)->format('l, n F Y') }}
+              / {{ \Carbon\Carbon::createFromFormat('H:i:s',session('data_reg')['event']->end_time)->format('g.i A') }}
             </small>
           </p>
-          <div class="mt-4">
-            <a href="" class="btn  btn-block btn-secondary mb-2"><i class="bi bi-printer-fill"></i> Cetak Tiket</a>
-            <form action="">
-              <button type="button" class="btn btn-danger btn-block"><i class="bi bi-x-circle-fill"></i> Batalkan Tiket</button>
-            </form>
-          </div>
         </div>
+      </div>
+      <div class="mt-4">
+        <button class="btn btn-block btn-secondary mb-2" id="dl-png" >Download Tiket</button>
+        @if(session('data_reg')['status_kehadiran'] == 0)
+
+        <form action="">
+          <button type="button" class="btn btn-danger btn-block"><i class="bi bi-x-circle-fill"></i> Batalkan
+            Tiket</button>
+        </form>
+        @endif
       </div>
     </div>
   </div>
@@ -71,23 +87,21 @@
   <br>
   <br>
 </main>
-@else 
-<script>window.location = "/";</script>
+@else
+<script>
+  window.location = "/";
+</script>
 @endif
 
 
 @endsection
 
 @push('addon-script')
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.13/dist/sweetalert2.all.min.js"></script>
 <script>
-  
-//   Swal.fire(
-//   'info',
-//   'That thing is still around?',
-//   'question'
-// )
 
+//script for sweetalert 2
 Swal.fire({
   title: '<strong>Perhatian !</strong>',
   icon: 'info',
@@ -95,5 +109,23 @@ Swal.fire({
     '<b>BERHASIL MELAKUKAN PENDAFTARAN</b> <br>'+
     'Halaman ini hanya muncul satu kali setelah melakukan checkout tiket,harap SCREENSHOT tiket ini atau DOWNLOAD tiket ini',
 })
+
+//script for html2canvas
+
+const screenshotTarget = document.querySelector("#download-page");
+    document.querySelector("#dl-png").onclick = function () {
+        html2canvas(screenshotTarget).then(function (canvas) {
+            const base64image = canvas.toDataURL("image/png");
+            var anchor = document.createElement('a');
+            anchor.setAttribute("href",base64image);
+            anchor.setAttribute("download", "tiket.png");
+            anchor.click();
+            anchor.remove();
+        });
+
+        // alert("hello")
+        // console.log(screenshotTarget)
+    }
+
 </script>
 @endpush

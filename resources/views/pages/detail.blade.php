@@ -37,7 +37,7 @@
             <div class="gallery">
               <div class="xzoom-container">
                 @if($event->thumbnail)
-                <img src="{{ Storage::url($event->thumbnail) }}" alt="" class="xzoom" style="background-size: cover;">
+                <img src="{{ url('storage/'.$event->thumbnail) }}" alt="" class="xzoom" style="background-size: cover;">
                 @else
                 <img src="{{ url('frondend/images/pic_featured.jpg') }}" alt="" class="xzoom"
                   style="background-size: cover;">
@@ -197,8 +197,8 @@
               <tr>
                 <th width="50%">Waktu</th>
                 <td width="50%" class="text-right">
-                  {{ \Carbon\Carbon::createFromFormat('H:i:s',$event->end_time)->format('g.i
-                  A') }} - {{ \Carbon\Carbon::createFromFormat('H:i:s',$event->start_time)->format('g.i A') }}
+                  {{ \Carbon\Carbon::createFromFormat('H:i:s',$event->start_time)->format('g.i
+                  A') }} - {{ \Carbon\Carbon::createFromFormat('H:i:s',$event->end_time)->format('g.i A') }}
                 </td>
               </tr>
             </table>

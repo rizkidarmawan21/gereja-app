@@ -60,7 +60,7 @@ Gereja
         <div class="col-sm-6 col-md-4 col-lg-3">
           <div class="card d-flex flex-column">
             <img
-              src="{{ $item->thumbnail ? Storage::url($item->thumbnail) :  url('frondend/images/default_event.jpg') }}"
+              src="{{ $item->thumbnail ? url('storage/'.$item->thumbnail) :  url('frondend/images/default_event.jpg') }}"
               class="card-img-top" alt="...">
             <div class="card-body ">
               <h5>{{ $item->title }}</h5>

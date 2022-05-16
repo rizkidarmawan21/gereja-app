@@ -35,7 +35,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td class="text-center">
-                                <img src="{{ $item->thumbnail ? Storage::url($item->thumbnail) :  url('frondend/images/default_event.jpg') }}"
+                                <img src="{{ $item->thumbnail ? url('storage/'.$item->thumbnail) :  url('frondend/images/default_event.jpg') }}"
                                     width="130" alt="">
                             </td>
                             <td>{{ $item->title }}</td>
