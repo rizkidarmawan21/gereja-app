@@ -71,7 +71,8 @@
                                     @method('PUT')
                                 </form>
                                 <button type="submit" class="btn-sm btn btn-danger btn-delete mb-3 mt-lg-2">Del</button>
-                                <form class="mt-lg-2" action="{{ route('reg_ibadah.destroy',$item->id) }}" method="post">
+                                <form class="mt-lg-2" action="{{ route('reg_ibadah.destroy',$item->id) }}"
+                                    method="post">
                                     @csrf
                                     @method('DELETE')
                                 </form>
@@ -107,7 +108,6 @@
 <!-- Page level custom scripts -->
 <script src="{{ url('backend/js/datatables-config.js') }}"></script>
 <script>
-
     // confirm for delete
     $(document).ready(function(){
         $('.btn-delete').click(function (e) {
@@ -131,17 +131,21 @@
             })
         });
 
+        $('.btn-set-hadir').click(function (e) {
+            // Show success message
+            Swal.fire(
+            'Berhasil!',
+            'Update kehadiran berhasil',
+            'success'
+            )
+            $(this).next('form').submit();
+        });
     });
 
     // confir for set hadir
-    $(document).ready(function(){
-        $('.btn-set-hadir').click(function (e) {
-            if (confirm('Anda Yakin Ingin Menghapus Data Ini?')) {
-                $(this).siblings('form').submit();
-            }
-            return false;
-        });
+    // $(document).ready(function(){
 
-    });
+
+    // });
 </script>
 @endpush

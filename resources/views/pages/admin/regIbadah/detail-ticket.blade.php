@@ -73,6 +73,13 @@
       </div>
       <div class="mt-4">
         <button class="btn btn-block btn-secondary mb-2" id="dl-png" >Download Tiket</button>
+        @if(session('data_reg')['status_kehadiran'] == 0)
+
+        <form action="">
+          <button type="button" class="btn btn-danger btn-block"><i class="bi bi-x-circle-fill"></i> Batalkan
+            Tiket</button>
+        </form>
+        @endif
       </div>
     </div>
   </div>

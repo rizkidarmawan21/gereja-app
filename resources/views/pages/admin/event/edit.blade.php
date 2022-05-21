@@ -89,6 +89,7 @@
                                 <label for="">Wilayah</label>
                                 <select name="region" id="" class="form-control" required>
                                     <option selected disabled>Choose </option>
+                                    <option value="Umum">Umum</option>
                                     <option value="" disabled>---- Untuk Jemaat ----</option>
                                     <option value="Alam Sutera">Alam Sutera</option>
                                     <option value="Anggrek Loka">Anggrek Loka</option>
@@ -185,6 +186,7 @@
                             berangsung !</small>
                         <label for="">Wilayah</label>
                         <select name="region" id="regionEdit" class="form-control" required>
+                            <option value="Umum">Umum</option>
                             <option value="" disabled>---- Untuk Jemaat ----</option>
                             <option value="Alam Sutera">Alam Sutera</option>
                             <option value="Anggrek Loka">Anggrek Loka</option>

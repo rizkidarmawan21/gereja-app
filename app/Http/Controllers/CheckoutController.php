@@ -57,7 +57,7 @@ class CheckoutController extends Controller
         ]);
 
 
-        $validation['status_kehadiran'] = 'belum hadir';
+        $validation['status_kehadiran'] = 0;
 
         $totalKouta = 0;
         //get data kouta
@@ -67,28 +67,19 @@ class CheckoutController extends Controller
             $totalKouta += $item->kouta;
         }
 
-
-        
-        $dataRegIbadah = RegIbadah::where('event_id', $request->event_id)->get(); 
-        if($totalKouta == count($dataRegIbadah)){
-            return redirect()->back()->with('error', 'Maaf kouta sudah penuh');
+        $seat_number = 0;
+        for ($i=1; $i <= $totalKouta ; $i++) {
+            $dataRegBySeatNumber = RegIbadah::where('seat_number',$i)->get(); 
+            if(count($dataRegBySeatNumber) > 0){
+                echo "id $i ada di database";
+                echo "<br />";
+            }else {
+                echo "id $i belum ada di database";
+                $seat_number = $i;
+                break;
+            }
+            // echo $i;
         }
-
-        if(count($dataRegIbadah) > 0){
-            // echo 'data event ada';
-            $seat_number = count($dataRegIbadah) + 1;
-            // foreach($dataRegIbadah as $item){
-            //     $seat_number += 1;
-            // }
-            
-        }else {
-            // echo 'data pendaftar kosong pada event tsb';
-            $seat_number = 1;
-
-        }
-
-        // die();
-
 
         $validation['seat_number'] = $seat_number;
 

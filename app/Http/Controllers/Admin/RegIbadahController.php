@@ -86,7 +86,9 @@ class RegIbadahController extends Controller
      */
     public function update(Request $request, RegIbadah $regIbadah)
     {
-        echo "update cok";
+         $regIbadah->update(['status_kehadiran'=>1]);
+        return redirect()->route('reg_ibadah.index');
+
     }
 
     /**

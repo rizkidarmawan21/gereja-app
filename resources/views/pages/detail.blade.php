@@ -84,11 +84,7 @@
               <div class="form-group">
                 <label for="age">Umur</label>
                 <small id="age" class="form-text text-muted ">Usia kehadiran minimal 12 Tahun</small>
-                <select class="form-control @error('age') is-invalid @enderror" id="age" name="age">
-                  <option value="">[ Pilih Usia ]</option>
-                  @for($i = 12; $i <= 80; $i++) <option value="{{ $i }}">{{ $i }}</option>
-                    @endfor
-                </select>
+                <input type="number" class="form-control @error('age') is-invalid @enderror" id="age" name="age" placeholder="Masukkan umur anda">
                 @error('age')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
