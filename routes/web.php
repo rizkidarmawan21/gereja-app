@@ -29,6 +29,7 @@ Route::get('/detail/{slug}', [DetailController::class, 'index'])->name('detail')
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout');
 Route::get('/profile',[HomeController::class,'profile'])->name('profile')->middleware('auth');
 Route::post('/profile/update',[ProfileController::class,'update'])->name('profile.update')->middleware('auth');
+Route::post('/profile/updatePassword',[ProfileController::class,'updatePassword'])->name('profile.update.password')->middleware('auth');
 Route::get('/ticket', [CheckoutController::class, 'ticket'])->name('ticket');
 
 Route::prefix('admin')

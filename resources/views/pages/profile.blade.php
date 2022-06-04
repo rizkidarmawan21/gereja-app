@@ -18,6 +18,12 @@ Profil Saya
           </div>
          
           @endif
+          @if (session()->has('error'))
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong> {{ session('error') }}</strong>
+          </div>
+         
+          @endif
           <div class="card card-details">
             <h1>Profil Saya</h1>
 
@@ -132,16 +138,32 @@ Profil Saya
           <div class="card card-details mt-4">
             <h1>Password Setting</h1>
 
-            <form>
+            <form action="{{ route('profile.update.password') }}" method="POST">
+              @csrf
               <div class="form-group">
                 <label for="">Repeat Password</label>
-                <input type="password" class="form-control">
+                <input type="password" name="current_password" class="form-control @error('current_password') is-invalid @enderror">
+                @error('current_password')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+                @enderror
               </div>
               <div class="form-group">
                 <label for="">Password</label>
-                <input type="password" class="form-control">
+                <input type="password" name="new_password" class="form-control @error('new_password') is-invalid @enderror">
+                @error('new_password')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+                @enderror
               </div>
               <button type="submit" class="btn btn-secondary">Ubah Password</button>
+              <br>
+              <br>
+              <span class="" role="alert">
+                * Hubungi admin jika ingin mereset password. <a href="https://wa.me/62" target="blank">Klik Disni</a>
+              </span>
             </form>
           </div>
         </div>
