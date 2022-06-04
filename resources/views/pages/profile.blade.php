@@ -12,10 +12,17 @@ Profil Saya
     <div class="container">
       <div class="row">
         <div class="col-lg-10 pl-lg-0 mx-auto">
+          @if (session()->has('success'))
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong> {{ session('success') }}</strong>
+          </div>
+         
+          @endif
           <div class="card card-details">
             <h1>Profil Saya</h1>
 
-            <form>
+            <form action="{{ route('profile.update') }}" method="POST">
+              @csrf
               <div class="form-group">
                 <label for="">Nama Lengkap</label>
                 <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
@@ -83,7 +90,7 @@ Profil Saya
               <div class="form-group">
                 <label for="">Wilayah</label>
                 <select name="region" id="" class="form-control @error('region') is-invalid @enderror"" required>
-                  <option selected value="{{ Auth::user()->region }}">{{ Auth::user()->region }}</option>
+                  <option selected value=" {{ Auth::user()->region }}">{{ Auth::user()->region }}</option>
                   <option disabled>Pilih</option>
                   <option value="Alam Sutera">Alam Sutera</option>
                   <option value="Anggrek Loka">Anggrek Loka</option>
