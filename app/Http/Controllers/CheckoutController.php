@@ -69,7 +69,7 @@ class CheckoutController extends Controller
 
         $seat_number = 0;
         for ($i=1; $i <= $totalKouta ; $i++) {
-            $dataRegBySeatNumber = RegIbadah::where('seat_number',$i)->get(); 
+            $dataRegBySeatNumber = RegIbadah::where([['event_id','=',$request->event_id],['seat_number','=',$i]])->get(); 
             if(count($dataRegBySeatNumber) > 0){
                 echo "id $i ada di database";
                 echo "<br />";

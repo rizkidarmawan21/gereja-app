@@ -109,7 +109,7 @@
                                     <option value="Puspiptek">Puspiptek</option>
                                     <option value="Suradita">Suradita</option>
                                     <option value="" disabled>---- Untuk Participan ----</option>
-                                    <option value="Bandung">Bandung</option>
+                                    <option value="Partisipan">Partisipan</option>
                                 </select>
                             </div>
                         </div>
@@ -206,7 +206,7 @@
                             <option value="Puspiptek">Puspiptek</option>
                             <option value="Suradita">Suradita</option>
                             <option value="" disabled>---- Untuk Participan ----</option>
-                            <option value="Bandung">Bandung</option>
+                            <option value="Partisipan">Partisipan</option>
                         </select>
                     </div>
                     <div class="form-group">

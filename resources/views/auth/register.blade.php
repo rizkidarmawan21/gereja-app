@@ -52,12 +52,24 @@ Daftar Jemaat
                                 </div>
                                 <div class="form-group">
                                     <label for="">Confirm Password</label>
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
+                                    <input id="password-confirm" type="password" class="form-control"
+                                        name="password_confirmation">
                                 </div>
-
+                                <div class="form-group">
+                                    <label for="">Tempat Lahir</label>
+                                    <input id="place_born" type="place_born"
+                                        class="form-control @error('place_born') is-invalid @enderror" name="place_born"
+                                        value="{{ old('place_born') }}">
+                                    @error('place_born')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
                                 <div class="form-group">
                                     <label for="">Tanggal Lahir</label>
-                                    <input type="date" class="form-control @error('date_born') is-invalid @enderror" value="{{ old('date_born') }}" name="date_born">
+                                    <input type="date" class="form-control @error('date_born') is-invalid @enderror"
+                                        value="{{ old('date_born') }}" name="date_born">
                                     @error('date_born')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -77,7 +89,9 @@ Daftar Jemaat
                                 </div>
                                 <div class="form-group">
                                     <label for="">Telepon / Whatsapp</label>
-                                    <input type="number" class="form-control @error('phone_number') is-invalid @enderror" value="{{ old('phone_number') }}" name="phone_number">
+                                    <input type="number"
+                                        class="form-control @error('phone_number') is-invalid @enderror"
+                                        value="{{ old('phone_number') }}" name="phone_number">
                                     @error('phone_number')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -85,8 +99,38 @@ Daftar Jemaat
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label for="">Wilayah</label>
+                                    <select name="region" id=""
+                                        class="form-control @error('region') is-invalid @enderror"" required>
+                                        <option selected disabled>Pilih</option>
+                                        <option value="Alam Sutera">Alam Sutera</option>
+                                        <option value="Anggrek Loka">Anggrek Loka</option>
+                                        <option value="Batan Indah">Batan Indah</option>
+                                        <option value="Cardolyne">Cardolyne</option>
+                                        <option value="Cikoleang">Cikoleang</option>
+                                        <option value="Dago Buaran">Dago Buaran</option>
+                                        <option value="Delatinos">Delatinos</option>
+                                        <option value="Foresta">Foresta</option>
+                                        <option value="Giri Loka">Giri Loka</option>
+                                        <option value="Griya Loka">Griya Loka</option>
+                                        <option value="Kencana Loka">Kencana Loka</option>
+                                        <option value="Melati Mas">Melati Mas</option>
+                                        <option value="Nusa Loka">Nusa Loka</option>
+                                        <option value="Pos Jemaat Cikoleang">Pos Jemaat Cikoleang</option>
+                                        <option value="Pos Jemaat Pagedangan">Pos Jemaat Pagedangan</option>
+                                        <option value="Puspiptek">Puspiptek</option>
+                                        <option value="Suradita">Suradita</option>
+                                    </select>
+                                    @error('region')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="">Alamat</label>
-                                    <textarea name="address" id="" cols="30" rows="3" class="form-control @error('address') is-invalid @enderror">{{ old('address') }}</textarea>
+                                    <textarea name="address" id="" cols="30" rows="3"
+                                        class="form-control @error('address') is-invalid @enderror">{{ old('address') }}</textarea>
                                     @error('address')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -99,6 +143,7 @@ Daftar Jemaat
                                 <p class="text-center">
                                     <a href="{{ route('login') }}">Sudah memiliki akun ? Login</a>
                                 </p>
+                            </form>
                         </div>
                     </div>
                 </div>

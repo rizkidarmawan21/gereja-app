@@ -21,10 +21,12 @@ class CreateUsersTable extends Migration
             $table->string('password'); //'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             $table->string('roles')->default('USER');
                 // USER , ADMIN
+            $table->string('place_born');
             $table->date('date_born');
             $table->string('gender');
             $table->string('phone_number');
             $table->string('address');
+            $table->string('region');
             $table->rememberToken();
             $table->timestamps();
             

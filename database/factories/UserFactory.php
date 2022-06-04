@@ -24,7 +24,9 @@ class UserFactory extends Factory
             'date_born'=>'2020-01-01',
             'address'=>'Jl. Kedoya',
             'phone_number'=>'08123456789',
-            'gender'=> 'pria'
+            'gender'=> 'pria',
+            'region'=> 'umum',
+            'place_born'=> 'Indonesia'
         ];
     }
 
