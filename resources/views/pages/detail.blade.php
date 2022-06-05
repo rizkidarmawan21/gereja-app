@@ -51,7 +51,7 @@
               <div class="form-group">
                 <input type="hidden" name="event_id" value="{{ $event->id }}">
                 <label for="name">Nama</label>
-                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Masukan nama anda">
+                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" value="@auth{{ old('name',Auth::user()->name) }}@else{{ old('name') }}@endauth" name="name" placeholder="Masukan nama anda">
                 @error('name')
                 <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
@@ -60,7 +60,7 @@
               </div>
               <div class="form-group">
                 <label for="phoneNumber">Telepon / Whatsapp</label>
-                <input type="number" class="form-control @error('phoneNumber') is-invalid @enderror" id="phoneNumber" name="phoneNumber" placeholder="Masukan nomor telepon / whatsapp">
+                <input type="number" class="form-control @error('phoneNumber') is-invalid @enderror" id="phoneNumber" name="phoneNumber" value="@auth{{ old('phoneNumber',Auth::user()->phone_number) }}@else{{ old('phoneNumber') }}@endauth" placeholder="Masukan nomor telepon / whatsapp">
                  
                 @error('phoneNumber')
                 <span class="invalid-feedback" role="alert">
@@ -72,8 +72,8 @@
                 <label for="gender">Jenis Kelamin</label>
                 <select class="form-control @error('gender') is-invalid @enderror" id="gender" name="gender">
                   <option value="">[ Pilih Kelamin ]</option>
-                  <option value="Pria">Pria</option>
-                  <option value="Wanita">Wanita</option>
+                  <option value="pria" @auth @if(Auth::user()->gender === "pria") selected @endif @endauth>Pria</option>
+                  <option value="wanita"  @auth @if(Auth::user()->gender === "wanita") selected @endif @endauth>Wanita</option>
                 </select>
                 @error('gender')
                 <span class="invalid-feedback" role="alert">
@@ -84,7 +84,10 @@
               <div class="form-group">
                 <label for="age">Umur</label>
                 <small id="age" class="form-text text-muted ">Usia kehadiran minimal 12 Tahun</small>
-                <input type="number" class="form-control @error('age') is-invalid @enderror" id="age" name="age" placeholder="Masukkan umur anda">
+                <?php
+                 $age = (date('Y') - date('Y',strtotime(Auth::user()->date_born)));
+                ?>
+                <input type="number" class="form-control @error('age') is-invalid @enderror" id="age" name="age" min="1" max="99" value="@auth{{ old('age',$age) }}@else{{ old('age') }}@endauth" placeholder="Masukkan umur anda">
                 @error('age')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -96,7 +99,7 @@
                 <label for="status">Status Anggota</label>
                 <select class="form-control @error('status_anggota') is-invalid @enderror" id="status" name="status_anggota">
                   <option value="">[ Pilih Status Anggota ]</option>
-                  <option value="Jemaat">Jemaat</option>
+                  <option value="Jemaat" @auth @if(Auth::user()) selected @endif @endauth>Jemaat</option>
                   <option value="Simpatika">Simpatika</option>
                 </select>
                 @error('status_anggota')
@@ -118,11 +121,10 @@
                   >
                   <?php $koutaSisa = $capacity->kouta - getCountRegisterByCapacities($capacity->id) ?>
                   {{ $capacity->region }} / ( {{ $koutaSisa <= 0 ? "Kouta habis" : "Sisa kouta {$koutaSisa} "  }}) 
-                  {{-- {{ $capacity->region }} / ( {{ $capacity->kouta - getCountRegisterByCapacities($capacity->id) <=}} ) --}}
                 </option>
                   @endforeach
                 </select>
-                @error('region')
+                @error('capacity_id')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
