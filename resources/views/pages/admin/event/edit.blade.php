@@ -80,7 +80,7 @@
 
         <div class="card shadow col-12 col-md-12 col-lg-5 mt-3 mt-lg-0">
             <div class="card-body ">
-                <h3 class="mb-3">Atur Wilayah dan Kouta Event</h3>
+                <h4 class="mb-3">Atur Wilayah dan Kouta Event</h4>
                 <form action="{{ route('capacity.store',$event->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
@@ -228,27 +228,25 @@
 @push('addon-script')
 <script>
     $(document).ready(function () {
-    
-    $.ajaxSetup({
-        headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-    });
-    
-    $('body').on('click', '#buttonEdit', function (event) {
-    
-        event.preventDefault();
-        var url = $(this).data('id');
+        $.ajaxSetup({
+            headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+        });
+        
+        $('body').on('click', '#buttonEdit', function (event) {
+        
+            event.preventDefault();
+            var url = $(this).data('id');
 
-        $.get(url, function (data) {
-            $('#regionEdit').append('<option value="'+data.data.region+'" selected>'+data.data.region+'</option>');
-            $('#koutaEdit').val(data.data.kouta);
-            var urlAction = '{{ route("capacity.update",":id") }}';
-            urlAction = urlAction.replace(":id", data.data.id);
-            $('#formEditCapacity').attr('action', urlAction);
-         })
-    });
-    
+            $.get(url, function (data) {
+                $('#regionEdit').append('<option value="'+data.data.region+'" selected>'+data.data.region+'</option>');
+                $('#koutaEdit').val(data.data.kouta);
+                var urlAction = '{{ route("capacity.update",":id") }}';
+                urlAction = urlAction.replace(":id", data.data.id);
+                $('#formEditCapacity').attr('action', urlAction);
+            })
+        });
     }); 
 </script>
 @endpush

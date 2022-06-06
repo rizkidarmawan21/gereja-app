@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class JemaatController extends Controller
 {
@@ -57,9 +58,9 @@ class JemaatController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $jemaat)
     {
-        //
+        return view('pages.admin.jemaat.edit', compact('jemaat'));
     }
 
     /**
@@ -71,8 +72,18 @@ class JemaatController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        echo 'update jemaat';
     }
+    
+    public function reset(Request $request, $id)
+    {
+        $password = "12345678";
+        $user = User::where('id', $id);
+        $user->update(['password'=>Hash::make($password)]);
+        $flashSession = "deleteConfirm();"; 
+        return redirect()->route('jemaat.index')->with('success', $flashSession);
+    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -80,8 +91,10 @@ class JemaatController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $jemaat)
     {
-        //
+        $jemaat->delete();
+        $flashSession = "deleteConfirm();"; 
+        return redirect()->route('jemaat.index')->with('success', $flashSession);
     }
 }

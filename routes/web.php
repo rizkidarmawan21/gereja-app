@@ -39,6 +39,7 @@ Route::prefix('admin')
     ->group(function () {
         Route::get('/', [DashboardController::class,'index'])->name('dashboard');
         Route::resource('event', EventController::class);
+        Route::put('jemaat/reset/{id}', [JemaatController::class, 'reset'])->name('jemaat.reset');
         Route::resource('jemaat', JemaatController::class);
         Route::post('capacity/store/{eventID}', [CapacityController::class, 'store'])->name('capacity.store');
         Route::resource('capacity', CapacityController::class)->except('store');

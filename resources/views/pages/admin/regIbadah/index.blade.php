@@ -70,7 +70,7 @@
                                     @csrf
                                     @method('PUT')
                                 </form>
-                                <button type="submit" class="btn-sm btn btn-danger btn-delete mb-3 mt-lg-2">Del</button>
+                                <button type="submit" class="btn-sm btn btn-danger btn-delete mb-3 mt-lg-2"><i class="fas fa-trash"></i></button>
                                 <form class="mt-lg-2" action="{{ route('reg_ibadah.destroy',$item->id) }}"
                                     method="post">
                                     @csrf
