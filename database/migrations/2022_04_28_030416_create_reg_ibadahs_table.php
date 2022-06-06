@@ -33,6 +33,7 @@ class CreateRegIbadahsTable extends Migration
                 ->on('capacities')
                 ->onDelete('cascade');
 
+            $table->integer('user_id');
             $table->string('transportasi');
             $table->string('status_anggota');
             $table->string('status_kehadiran'); //hadir, izin, sakit, alfa  

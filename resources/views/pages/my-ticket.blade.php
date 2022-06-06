@@ -6,7 +6,8 @@
 <!-- main -->
 
 
-@if(session('data_reg'))
+@auth
+
 <main>
   <div class="section-success d-flex align-items-center">
 
@@ -36,20 +37,20 @@
           <hr>
           <div class=" mt-4">
             <h4>
-              {{ session('data_reg')['event']->title }}
+              {{ $ticket->event->title }}
             </h4>
           </div>
           <div class="detail-ticket  mt-3">
             <p>
               <i class="bi bi-calendar-event"></i>
-              {{\Carbon\Carbon::create(session('data_reg')['event']->start_date)->format('l, n F Y') }}
+              {{\Carbon\Carbon::create($ticket->event->start_date)->format('l, n F Y') }}
               <span class="ml-4"></span>
               <i class="bi bi-clock"></i>
-              {{\Carbon\Carbon::createFromFormat('H:i:s',session('data_reg')['event']->start_time)->format('g.i A') }} -
-              {{ \Carbon\Carbon::createFromFormat('H:i:s',session('data_reg')['event']->end_time)->format('g.i A') }}
+              {{\Carbon\Carbon::createFromFormat('H:i:s',$ticket->event->start_time)->format('g.i A') }} -
+              {{ \Carbon\Carbon::createFromFormat('H:i:s',$ticket->event->end_time)->format('g.i A') }}
             </p>
-            <h3>{{ session('data_reg')['name'] }}</h3>
-            <h5>Nomor Kursi <b>{{ session('data_reg')['seat_number'] }}</b></h5>
+            <h3>{{$ticket->name }}</h3>
+            <h5>Nomor Kursi <b>{{ $ticket->seat_number }}</b></h5>
           </div>
           <p class="mt-5 ">
             Silakan tunjukan tiket ini saat anda melakukan check in di tempat acara
@@ -57,8 +58,7 @@
           <hr>
           <p>
             <b>
-              @if(session('data_reg')['status_kehadiran'] == 0)
-
+              @if($ticket->status_kehadiran == 0)
               Tiket Belum Digunakan
               @else
               Tiket telah digunakan
@@ -66,8 +66,8 @@
             </b>
             <br>
             <small>
-              Berlaku hingga {{ \Carbon\Carbon::create(session('data_reg')['event']->start_date)->format('l, n F Y') }}
-              / {{ \Carbon\Carbon::createFromFormat('H:i:s',session('data_reg')['event']->end_time)->format('g.i A') }}
+              Berlaku hingga {{ \Carbon\Carbon::create($ticket->event->start_date)->format('l, n F Y') }}
+              / {{ \Carbon\Carbon::createFromFormat('H:i:s',$ticket->event->end_time)->format('g.i A') }}
             </small>
           </p>
         </div>
@@ -81,12 +81,8 @@
   <br>
   <br>
 </main>
-@else
-<script>
-  window.location = "/";
-</script>
-@endif
 
+@endauth
 
 
 @endsection
@@ -96,13 +92,13 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.13/dist/sweetalert2.all.min.js"></script>
 <script>
   //script for sweetalert 2
-Swal.fire({
-  title: '<strong>Perhatian !</strong>',
-  icon: 'info',
-  html:
-    '<b>BERHASIL MELAKUKAN PENDAFTARAN</b> <br>'+
-    'Halaman ini hanya muncul satu kali setelah melakukan checkout tiket,harap SCREENSHOT tiket ini atau DOWNLOAD tiket ini',
-})
+// Swal.fire({
+//   title: '<strong>Perhatian !</strong>',
+//   icon: 'info',
+//   html:
+//     '<b>BERHASIL MELAKUKAN PENDAFTARAN</b> <br>'+
+//     'Halaman ini hanya muncul satu kali setelah melakukan checkout tiket,harap SCREENSHOT tiket ini atau DOWNLOAD tiket ini',
+// })
 
 //script for html2canvas
 

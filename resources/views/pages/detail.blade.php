@@ -84,10 +84,7 @@
               <div class="form-group">
                 <label for="age">Umur</label>
                 <small id="age" class="form-text text-muted ">Usia kehadiran minimal 12 Tahun</small>
-                <?php
-                 $age = (date('Y') - date('Y',strtotime(Auth::user()->date_born)));
-                ?>
-                <input type="number" class="form-control @error('age') is-invalid @enderror" id="age" name="age" min="1" max="99" value="@auth{{ old('age',$age) }}@else{{ old('age') }}@endauth" placeholder="Masukkan umur anda">
+                <input type="number" class="form-control @error('age') is-invalid @enderror" id="age" name="age" min="1" max="99" value="@auth{{ old('age',(date('Y') - date('Y',strtotime(Auth::user()->date_born)))) }}@else{{ old('age') }}@endauth" placeholder="Masukkan umur anda">
                 @error('age')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

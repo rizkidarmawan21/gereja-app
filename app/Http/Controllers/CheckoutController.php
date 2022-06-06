@@ -7,6 +7,7 @@ use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\RegIbadah;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
 {
@@ -46,7 +47,6 @@ class CheckoutController extends Controller
         //
         $validation = $request->validate([
             'event_id' => 'required',
-            // 'seat_number' => 'required',
             'name' => 'required',
             'gender' => 'required',
             'age' => 'required',
@@ -59,7 +59,10 @@ class CheckoutController extends Controller
 
         $validation['status_kehadiran'] = 0;
 
+        $validation['user_id'] = Auth::user() ? Auth::user()->id : 0 ;
+
         $totalKouta = 0;
+
         //get data kouta
         $dataEvent = Event::with(['capacities'])->findOrFail($request->event_id);
 
@@ -78,13 +81,13 @@ class CheckoutController extends Controller
                 $seat_number = $i;
                 break;
             }
-            // echo $i;
         }
 
         $validation['seat_number'] = $seat_number;
 
         RegIbadah::create($validation);
         
+        // save data in session
         $dataRegIbadah = [
             'name' =>$request->name,
             'event' => Event::findOrFail($request->event_id),
@@ -92,9 +95,7 @@ class CheckoutController extends Controller
             'status_kehadiran' => '0',  // 0 = belum hadir,1 = sudah hadir
         ];
 
-        // return view('pages.ticket');
         return redirect()->route('ticket')->with('data_reg' ,$dataRegIbadah);
-        // echo "success daftar";
     }
 
     /**

@@ -37,11 +37,11 @@
         @guest  
         <!-- Mobile Button -->
         <form class="form-inline d-sm-block d-md-none">
-          <button class="btn btn-login my-2 my-sm-0 px-4" type="button" onclick="event.preventDefault(); location.href='{{ 'login' }}';">Masuk</button>
+          <button class="btn btn-login my-2 my-sm-0 px-4" type="button" onclick="event.preventDefault(); location.href='{{ route('login') }}';">Masuk</button>
         </form>
         <!-- Desktop Button -->
         <form class="form-inline my-2 my-lg-0 d-none d-md-block">
-          <button class="btn btn-login btn-navbar-right my-2 my-sm-0 px-4" type="button" onclick="event.preventDefault(); location.href='{{ 'login' }}';">
+          <button class="btn btn-login btn-navbar-right my-2 my-sm-0 px-4" type="button" onclick="event.preventDefault(); location.href='{{ route('login') }}';">
             Masuk
           </button>
         </form>

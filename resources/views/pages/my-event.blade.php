@@ -15,36 +15,29 @@ Event Saya
                         <div class="card card-details">
                             <h1>Event Saya</h1>
 
+                            @foreach($events as $item)      
                             <div class="card mt-3">
                                 <div class="card-body ">
-                                    <h5>Ibadah 1</h5>
-                                    <h6>Kode #0012</h6>
+                                    <h5>{{ $item->name }}</h5>
+                                    <h6>{{ $item->event->title }}</h6>
+                                    <h6>Nomor Kursi {{ $item->seat_number }}</h6>
                                     <p class="desc text-black-50">
-                                        <i class="bi bi-calendar-event"></i> Minggu, 10 April 2022
+                                        <i class="bi bi-calendar-event"></i> {{ \Carbon\Carbon::create($item->event->start_date)->format('l, n F Y') }}
                                         <br>
-                                        <i class="bi bi-clock"></i> 10.00 - 12.00
+                                        <i class="bi bi-clock"></i> {{ \Carbon\Carbon::createFromFormat('H:i:s',$item->event->start_time)->format('g:i A') }} - {{
+                                            \Carbon\Carbon::createFromFormat('H:i:s',$item->event->end_time)->format('g:i A') }}
                                     </p>
                                     <hr>
                                     <div class="text-center">
-                                        <a href="" class="btn btn-block btn-success">Lihat Tiket Saya <i class="ml-1 bi bi-arrow-right-circle"></i></a>
+                                        @if($item->status_kehadiran == 0)
+                                        <a href="{{ route('my-ticket',$item->id) }}" class="btn btn-block btn-success">Lihat Tiket Saya <i class="ml-1 bi bi-arrow-right-circle"></i></a>
+                                        @else
+                                        <a href="" class="btn btn-block btn-secondary disabled">Tiket Telah Digunakan </a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
-                            <div class="card mt-3">
-                                <div class="card-body ">
-                                    <h5>Ibadah 2</h5>
-                                    <h6>Kode #0012</h6>
-                                    <p class="desc text-black-50">
-                                        <i class="bi bi-calendar-event"></i> Minggu, 17 April 2022
-                                        <br>
-                                        <i class="bi bi-clock"></i> 10.00 - 12.00
-                                    </p>
-                                    <hr>
-                                    <div class="text-center">
-                                        <a href="" class="btn btn-block btn-success">Lihat Tiket Saya <i class="ml-1 bi bi-arrow-right-circle"></i></a>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

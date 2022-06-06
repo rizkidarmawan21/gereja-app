@@ -22,7 +22,7 @@
                             <th>Nama</th>
                             <th>Gender</th>
                             <th>Telepon</th>
-                            <th>Alamat</th>
+                            <th>Wilayah</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -33,7 +33,7 @@
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->gender }}</td>
                                 <td>{{ $item->phone_number }}</td>
-                                <td>{{ $item->address }}</td>
+                                <td>{{ $item->region }}</td>
                                 <td>
                                     {{-- <a href="{{ route('jemaat.show', $item->id) }}" class="btn btn-sm btn-primary">
                                         <i class="fas fa-eye"></i>

@@ -31,6 +31,7 @@ Route::get('/profile',[HomeController::class,'profile'])->name('profile')->middl
 Route::post('/profile/update',[ProfileController::class,'update'])->name('profile.update')->middleware('auth');
 Route::post('/profile/updatePassword',[ProfileController::class,'updatePassword'])->name('profile.update.password')->middleware('auth');
 Route::get('/ticket', [CheckoutController::class, 'ticket'])->name('ticket');
+Route::get('/my-ticket/{id}', [HomeController::class, 'ticket'])->name('my-ticket')->middleware('auth');
 
 Route::prefix('admin')
     // ->namespace('App\Http\Controllers\Admin')
