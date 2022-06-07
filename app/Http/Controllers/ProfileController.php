@@ -41,20 +41,14 @@ class ProfileController extends Controller
 
     public function update(Request $request, User $user)
     {
-
-        // dd(Auth::user()->id);
         $validation = $this->validation($request);
         User::where('id', Auth::user()->id)->update($validation);
-        // $user->set($validation)->whe;
-        // $user->save();
         return redirect()->route('profile')->with('success', 'Profil Berhasil diperbarui!');
 
     }
 
 
     public function updatePassword(Request $request){
-        // echo "coba";
-        // die;
         $validation = $request->validate([
             'current_password' => 'required',
             'new_password' => 'required|string|min:8',

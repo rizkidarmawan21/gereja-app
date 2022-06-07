@@ -35,9 +35,6 @@
                             <td>{{ $item->phone_number }}</td>
                             <td>{{ $item->region }}</td>
                             <td>
-                                {{-- <a href="{{ route('jemaat.show', $item->id) }}" class="btn btn-sm btn-primary">
-                                    <i class="fas fa-eye"></i>
-                                </a> --}}
                                 <a href="{{ route('jemaat.edit', $item->id) }}" class="btn btn-sm btn-info">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>
@@ -90,6 +87,14 @@
 
     // confirm for delete
     function deleteConfirm(){
+        Swal.fire(
+                'Berhasil Dihapus!',
+                'Data anda berhasil dihapus',
+                'success'
+                )
+    }
+    // confirm for edit
+    function editConfirm(){
         Swal.fire(
                 'Berhasil Dihapus!',
                 'Data anda berhasil dihapus',

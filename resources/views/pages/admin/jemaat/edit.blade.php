@@ -28,7 +28,7 @@
                     @method('PUT')
                     @csrf
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-md-6">
 
                             <div class="form-group">
                                 <label for="">Nama Lengkap</label>
@@ -73,7 +73,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Jenis Kelamin</label>
                                 <br>
