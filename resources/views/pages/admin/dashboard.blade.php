@@ -21,7 +21,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Jemaat</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">2323</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $dataCount['jemaatCount'] }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-users fa-2x text-gray-300"></i>
@@ -39,7 +39,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Event</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">12</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $dataCount['eventsCount'] }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -58,7 +58,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                 Pendaftar Ibadah / Event</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">21</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $dataCount['regIbadahCount'] }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-check fa-2x text-gray-300"></i>
